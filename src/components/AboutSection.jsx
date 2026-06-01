@@ -1,10 +1,68 @@
-import { Briefcase, Code, User, Download } from "lucide-react";
+import { Briefcase, Code, GraduationCap, User, Download, Smartphone, Cpu, Building2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import cvPdf from "../assets/Kasun Mundigala.pdf";
+
+const capabilities = [
+  {
+    icon: Code,
+    title: "Full-Stack Development",
+    desc: "Building dynamic, responsive web applications using modern technologies and frameworks.",
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile Development",
+    desc: "Developing high-performance, cross-platform mobile apps for iOS and Android.",
+  },
+  {
+    icon: User,
+    title: "UI/UX Design",
+    desc: "Designing user-focused interfaces that provide smooth, engaging digital experiences.",
+  },
+  {
+    icon: Cpu,
+    title: "AI & Production Solutions",
+    desc: "Integrating AI-powered solutions and delivering production-grade systems across web, mobile, and ERP.",
+  },
+];
+
+const education = [
+  {
+    degree: "BSc (Hons) in Software Engineering",
+    grade: "Second Class (Upper Division)",
+    institution: "University of Plymouth",
+    period: "2022 – 2025",
+  },
+  {
+    degree: "English Diploma",
+    institution: "Aquinas College",
+    period: "2021 – 2022",
+  },
+  {
+    degree: "G.C.E. A/Level (Commerce)",
+    institution: "Siri Piyarathana College",
+    period: "2020 – 2021",
+  },
+];
+
+const experience = [
+  {
+    role: "Full-Stack & Mobile Developer",
+    company: "Cozy Hub Digital",
+    period: "September 2025 – Present",
+    points: [
+      "Developed and maintained scalable web, mobile, and ERP applications using modern technologies and best practices.",
+      "Designed and implemented secure backend services, RESTful APIs, and efficient database solutions.",
+      "Led end-to-end development activities, from requirements analysis to deployment and ongoing support.",
+      "Collaborated with cross-functional teams to deliver high-quality software solutions in Agile environments.",
+    ],
+  },
+];
 
 export const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [count, setCount] = useState(0);
+  const [activeTab, setActiveTab] = useState("education");
   const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -13,117 +71,86 @@ export const AboutSection = () => {
           setIsVisible(true);
         }
       },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px"
-      }
+      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
   }, []);
 
+  // Animated counter for 15+
   useEffect(() => {
-    const handleMouseMove = (e, cardElement, iconElement) => {
-      if (!cardElement || !iconElement) return;
-
-      const { clientX, clientY } = e;
-      const { left, top, width, height } = cardElement.getBoundingClientRect();
-      
-      const x = (clientX - left) / width - 0.5;
-      const y = (clientY - top) / height - 0.5;
-      
-      cardElement.style.transform = `
-        perspective(1000px)
-        rotateY(${x * 5}deg)
-        rotateX(${y * -5}deg)
-        translateZ(10px)
-      `;
-
-      iconElement.style.transform = `
-        scale(1.2)
-        rotate(${x * 20}deg)
-        translateZ(20px)
-      `;
-    };
-
-    const handleMouseLeave = (cardElement, iconElement) => {
-      if (!cardElement || !iconElement) return;
-      cardElement.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateZ(0)';
-      iconElement.style.transform = 'scale(1) rotate(0) translateZ(0)';
-    };
-
-    cardsRef.current.forEach((card) => {
-      if (card) {
-        const iconWrapper = card.querySelector('.icon-wrapper');
-        const mouseMoveHandler = (e) => handleMouseMove(e, card, iconWrapper);
-        const mouseLeaveHandler = () => handleMouseLeave(card, iconWrapper);
-        
-        card.addEventListener('mousemove', mouseMoveHandler);
-        card.addEventListener('mouseleave', mouseLeaveHandler);
-        
-        card._mouseMoveHandler = mouseMoveHandler;
-        card._mouseLeaveHandler = mouseLeaveHandler;
-      }
-    });
-
-    return () => {
-      cardsRef.current.forEach((card) => {
-        if (card && card._mouseMoveHandler) {
-          card.removeEventListener('mousemove', card._mouseMoveHandler);
-          card.removeEventListener('mouseleave', card._mouseLeaveHandler);
-        }
-      });
-    };
+    if (!isVisible) return;
+    let start = 0;
+    const end = 15;
+    const duration = 1200;
+    const step = Math.ceil(duration / end);
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start >= end) clearInterval(timer);
+    }, step);
+    return () => clearInterval(timer);
   }, [isVisible]);
 
   return (
-    <section id="about" className="py-24 px-4 relative" ref={sectionRef}>
-      <div className="container mx-auto max-w-5xl">
-        <h2 className={`text-3xl md:text-4xl font-bold mb-12 text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          About <span className="text-primary"> Me</span>
-        </h2>
+    <section id="about" className="py-16 sm:py-24 lg:py-28 px-4 sm:px-6 relative overflow-hidden" ref={sectionRef}>
+      {/* Ambient glow blobs */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className={`space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-            <div className="relative">
-              <h3 className="text-2xl font-bold leading-tight">
-                <span className="bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
+      <div className="container mx-auto max-w-6xl relative z-10">
+
+        {/* Section Title */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold">
+            About <span className="text-primary">Me</span>
+          </h2>
+          <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-primary to-primary/40" />
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-14 lg:mb-20">
+
+          {/* LEFT: Bio + Stat + Buttons */}
+          <div className={`text-center lg:text-left transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+
+            {/* Title with accent bar */}
+            <div className="relative pl-5 border-l-4 border-primary rounded-sm mb-6">
+              <h3 className="text-2xl font-bold leading-snug">
+                <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                   Motivated Software Engineer
                 </span>
                 <br />
-                <span className="text-foreground">& Full-Stack Developer</span>
+                <span className="text-foreground">Full-Stack &amp; Mobile Developer</span>
               </h3>
-              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-primary to-primary/30 rounded-full"></div>
             </div>
 
-            <p className="text-muted-foreground">
-              As a recent Software Engineering graduate, I specialize in building responsive, scalable web applications using the MERN stack. I focus on integrating modern UI/UX principles to deliver seamless and intuitive user experiences.
-            </p>
+            {/* Bio Paragraph */}
+            <div className="space-y-4 mb-8">
+              <p className="text-muted-foreground leading-relaxed text-justify">
+                Motivated Software Engineering graduate (BSc Hons, Second Class Upper) with a strong passion for Full-Stack, Mobile, and ERP systems. Experienced in transforming complex requirements into responsive, production-level solutions, I have successfully delivered 15+ high-performance projects through clean code, structured system design, and collaborative teamwork.
+              </p>
+            </div>
 
-            <p className="text-muted-foreground">
-              I'm passionate about turning ideas into impactful digital solutions through clean code, collaborative teamwork, and continuous learning, while exploring emerging technologies and innovative approaches to solve complex problems in the ever-evolving world of web development.
-            </p>
+            {/* 15+ Projects Stat */}
+            <div className="flex items-center gap-4 mb-8">
+              <div className="text-4xl md:text-5xl font-black text-primary leading-none tabular-nums">
+                {count}<span className="text-2xl md:text-3xl font-extrabold">+</span>
+              </div>
+              <div className="text-sm font-semibold text-muted-foreground tracking-wide leading-tight max-w-[200px]">
+                Production-Grade Projects Completed
+              </div>
+            </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <a href="#contact" className="cosmic-button">
                 Get In Touch
               </a>
-
               <a
-                href="https://drive.google.com/file/d/1tLbBjOFqLSBfHwOq2QpxJyt1fpfQrltn/view?usp=sharing"
-                className="px-6 py-2 rounded-full border border-primary text-primary 
-                           hover:bg-primary/10 transition-colors duration-300 
-                           flex items-center gap-2"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={cvPdf}
+                download="Kasun Mundigala.pdf"
+                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300 flex items-center gap-2 font-medium"
               >
                 <Download className="h-4 w-4" />
                 Download CV
@@ -131,60 +158,137 @@ export const AboutSection = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6">
-            <div 
-              ref={(el) => (cardsRef.current[0] = el)}
-              className={`gradient-border p-6 card-hover transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`} 
-              style={{ transitionDelay: '300ms', transformStyle: 'preserve-3d' }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="icon-wrapper p-3 rounded-full bg-gradient-to-br from-primary to-primary/60 shadow-lg transition-all duration-300" style={{ transformStyle: 'preserve-3d' }}>
-                  <Code className="h-6 w-6 text-white" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg"> Full-Stack Development</h4>
-                  <p className="text-muted-foreground">
-                    Building dynamic, responsive web applications using modern technologies and frameworks.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div 
-              ref={(el) => (cardsRef.current[1] = el)}
-              className={`gradient-border p-6 card-hover transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`} 
-              style={{ transitionDelay: '450ms', transformStyle: 'preserve-3d' }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="icon-wrapper p-3 rounded-full bg-gradient-to-br from-primary to-primary/60 shadow-lg transition-all duration-300" style={{ transformStyle: 'preserve-3d' }}>
-                  <User className="h-6 w-6 text-white" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">UI/UX Design</h4>
-                  <p className="text-muted-foreground">
-                    Designing user-focused interfaces that provide smooth, engaging, and meaningful digital experiences.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div 
-              ref={(el) => (cardsRef.current[2] = el)}
-              className={`gradient-border p-6 card-hover transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`} 
-              style={{ transitionDelay: '600ms', transformStyle: 'preserve-3d' }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="icon-wrapper p-3 rounded-full bg-gradient-to-br from-primary to-primary/60 shadow-lg transition-all duration-300" style={{ transformStyle: 'preserve-3d' }}>
-                  <Briefcase className="h-6 w-6 text-white" />
-                </div>
+          {/* RIGHT: Capability Cards 2x2 Grid */}
+          <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+            {capabilities.map((cap, i) => {
+              const Icon = cap.icon;
+              return (
+                <div
+                  key={i}
+                  className="group relative p-5 rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm shadow-sm hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 cursor-default overflow-hidden"
+                  style={{ transitionDelay: `${300 + i * 100}ms` }}
+                >
+                  {/* Hover glow accent */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg">Collaborative Team</h4>
-                  <p className="text-muted-foreground">
-                    Driving teamwork and communication to achieve project goals efficiently through agile practices..
-                  </p>
+                  <div className="relative z-10 flex flex-col gap-3">
+                    {/* Icon */}
+                    <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/60 shadow-md group-hover:scale-110 group-hover:shadow-primary/30 transition-all duration-300">
+                      <Icon className="h-5 w-5 text-white" />
+                    </div>
+                    {/* Text */}
+                    <div>
+                      <h4 className="font-bold text-base text-foreground group-hover:text-primary transition-colors duration-300">
+                        {cap.title}
+                      </h4>
+                      <p className="text-muted-foreground text-sm mt-1 leading-relaxed">
+                        {cap.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-primary to-primary/30 transition-all duration-500 rounded-b-2xl" />
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
+        </div>
+
+        {/* ── Education & Experience Section ── */}
+        <div className={`transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+
+          {/* Divider */}
+          <div className="relative flex flex-wrap items-center justify-center gap-3 mb-10">
+            <div className="hidden sm:block flex-grow border-t border-border/40" />
+            <div className="flex gap-3 flex-wrap justify-center">
+              <button
+                onClick={() => setActiveTab("education")}
+                className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
+                  activeTab === "education"
+                    ? "bg-primary text-white border-transparent shadow-lg shadow-primary/25"
+                    : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-primary"
+                }`}
+              >
+                <GraduationCap size={15} />
+                Education
+              </button>
+              <button
+                onClick={() => setActiveTab("experience")}
+                className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
+                  activeTab === "experience"
+                    ? "bg-primary text-white border-transparent shadow-lg shadow-primary/25"
+                    : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-primary"
+                }`}
+              >
+                <Briefcase size={15} />
+                Work Experience
+              </button>
+            </div>
+            <div className="hidden sm:block flex-grow border-t border-border/40" />
+          </div>
+
+          {/* Education Tab */}
+          {activeTab === "education" && (
+            <div className="relative pl-6 border-l-2 border-primary/30 space-y-8 max-w-3xl mx-auto">
+              {education.map((edu, i) => (
+                <div key={i} className="relative group">
+                  {/* Timeline dot */}
+                  <div className="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary group-hover:bg-primary transition-colors duration-300" />
+                  <div className="p-5 rounded-2xl border border-border/50 bg-card/70 backdrop-blur-sm hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1">
+                      <h4 className="font-bold text-foreground text-base leading-snug group-hover:text-primary transition-colors duration-300">
+                        {edu.degree}
+                      </h4>
+                      <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                        {edu.period}
+                      </span>
+                    </div>
+                    {edu.grade && (
+                      <p className="text-sm text-primary/80 font-medium mb-0.5">{edu.grade}</p>
+                    )}
+                    <p className="text-sm text-muted-foreground">{edu.institution}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Experience Tab */}
+          {activeTab === "experience" && (
+            <div className="relative pl-6 border-l-2 border-primary/30 space-y-8 max-w-3xl mx-auto">
+              {experience.map((exp, i) => (
+                <div key={i} className="relative group">
+                  {/* Timeline dot */}
+                  <div className="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary group-hover:bg-primary transition-colors duration-300" />
+                  <div className="p-5 rounded-2xl border border-border/50 bg-card/70 backdrop-blur-sm hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+                      <div>
+                        <h4 className="font-bold text-foreground text-base leading-snug group-hover:text-primary transition-colors duration-300">
+                          {exp.role}
+                        </h4>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <Building2 size={13} className="text-primary/70" />
+                          <span className="text-sm text-primary/80 font-medium">{exp.company}</span>
+                        </div>
+                      </div>
+                      <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                        {exp.period}
+                      </span>
+                    </div>
+                    <ul className="space-y-2">
+                      {exp.points.map((point, j) => (
+                        <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
+                          <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary/50" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

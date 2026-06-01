@@ -66,8 +66,8 @@ export const StarBackground = () => {
       
       {/* Subtle mesh gradient overlay */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-purple-200/20 via-transparent to-blue-200/20 dark:from-purple-900/20 dark:to-blue-900/20" />
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-rose-100/10 to-transparent dark:via-rose-900/10" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-200/10 via-transparent to-sky-200/10 dark:from-blue-950/20 dark:to-sky-900/20" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-cyan-100/5 to-transparent dark:via-cyan-900/5" />
       </div>
 
       {/* Animated grid dots */}
@@ -90,10 +90,10 @@ export const StarBackground = () => {
           key={element.id}
           className={`absolute animate-float-gentle ${
             element.type === 0
-              ? "rounded-full bg-gradient-to-br from-blue-200/20 to-purple-300/20 dark:from-blue-800/20 dark:to-purple-700/20"
+              ? "rounded-full bg-gradient-to-br from-blue-200/25 to-sky-300/20 dark:from-blue-900/20 dark:to-sky-800/20"
               : element.type === 1
-              ? "rounded-lg bg-gradient-to-br from-emerald-200/20 to-teal-300/20 dark:from-emerald-800/20 dark:to-teal-700/20 rotate-12"
-              : "bg-gradient-to-br from-rose-200/20 to-pink-300/20 dark:from-rose-800/20 dark:to-pink-700/20 transform rotate-45"
+              ? "rounded-lg bg-gradient-to-br from-indigo-200/20 to-blue-300/20 dark:from-indigo-900/20 dark:to-blue-800/20 rotate-12"
+              : "bg-gradient-to-br from-cyan-200/20 to-sky-300/20 dark:from-cyan-900/20 dark:to-sky-800/20 transform rotate-45"
           } backdrop-blur-sm border border-white/10 dark:border-white/5`}
           style={{
             width: element.size + "px",
@@ -109,16 +109,16 @@ export const StarBackground = () => {
 
       {/* Subtle light rays */}
       <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-blue-200/30 to-transparent dark:via-blue-800/20 animate-pulse-slow" />
-      <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-purple-200/30 to-transparent dark:via-purple-800/20 animate-pulse-slow" style={{ animationDelay: "2s" }} />
-      <div className="absolute top-1/3 left-0 h-px w-full bg-gradient-to-r from-transparent via-rose-200/30 to-transparent dark:via-rose-800/20 animate-pulse-slow" style={{ animationDelay: "4s" }} />
+      <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-sky-200/20 to-transparent dark:via-sky-800/20 animate-pulse-slow" style={{ animationDelay: "2s" }} />
+      <div className="absolute top-1/3 left-0 h-px w-full bg-gradient-to-r from-transparent via-cyan-200/20 to-transparent dark:via-cyan-800/20 animate-pulse-slow" style={{ animationDelay: "4s" }} />
 
       {/* Radial gradient overlays for depth */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-radial from-blue-200/10 to-transparent dark:from-blue-800/10 rounded-full animate-pulse-slow" />
-      <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-radial from-purple-200/10 to-transparent dark:from-purple-800/10 rounded-full animate-pulse-slow" style={{ animationDelay: "3s" }} />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-emerald-100/5 to-transparent dark:from-emerald-800/5 rounded-full animate-pulse-slow" style={{ animationDelay: "6s" }} />
+      <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-radial from-indigo-200/10 to-transparent dark:from-indigo-800/10 rounded-full animate-pulse-slow" style={{ animationDelay: "3s" }} />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-sky-100/5 to-transparent dark:from-sky-800/5 rounded-full animate-pulse-slow" style={{ animationDelay: "6s" }} />
 
       {/* CSS Custom Animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes float-gentle {
           0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
           25% { transform: translateY(-10px) translateX(5px) rotate(1deg); }

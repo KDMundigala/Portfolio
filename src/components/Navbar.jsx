@@ -16,7 +16,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10); // Fixed: was screenY, should be scrollY
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -25,7 +25,6 @@ export const Navbar = () => {
 
   const handleNavClick = (href) => {
     setIsMenuOpen(false);
-    // Smooth scroll to section
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -40,8 +39,8 @@ export const Navbar = () => {
       )}
     >
       <div className="container flex items-center justify-between">
-        {/* Logo on the left */}
-        
+
+
         {/* Navigation items in the center - Desktop */}
         <div className="hidden md:flex items-center justify-center flex-1">
           <div className="flex space-x-8 bg-background/20 backdrop-blur-sm rounded-full px-8 py-3 border border-primary/20">
@@ -56,8 +55,8 @@ export const Navbar = () => {
                 className="relative text-foreground/80 hover:text-primary transition-all duration-300 px-3 py-2 rounded-full hover:bg-primary/10 group"
               >
                 <span className="relative z-10">{item.name}</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-pink-500/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></span>
-                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                <span className="absolute inset-0 bg-primary/5 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></span>
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
               </a>
             ))}
           </div>
@@ -115,8 +114,8 @@ export const Navbar = () => {
                 }}
               >
                 <span className="relative z-10">{item.name}</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-pink-500/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></span>
-                <span className="absolute bottom-2 left-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 group-hover:w-3/4 group-hover:left-1/8 transition-all duration-300"></span>
+                <span className="absolute inset-0 bg-primary/5 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></span>
+                <span className="absolute bottom-2 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 group-hover:w-3/4 group-hover:left-1/8 transition-all duration-300"></span>
               </a>
             ))}
           </div>
