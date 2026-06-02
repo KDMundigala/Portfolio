@@ -61,7 +61,6 @@ const experience = [
 export const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [count, setCount] = useState(0);
-  const [activeTab, setActiveTab] = useState("education");
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -121,7 +120,7 @@ export const AboutSection = () => {
                   Motivated Software Engineer
                 </span>
                 <br />
-                <span className="text-foreground">Full-Stack &amp; Mobile Developer</span>
+                <span className="text-foreground">Full-Stack & Mobile Developer</span>
               </h3>
             </div>
 
@@ -170,7 +169,6 @@ export const AboutSection = () => {
                 >
                   {/* Hover glow accent */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-
                   <div className="relative z-10 flex flex-col gap-3">
                     {/* Icon */}
                     <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/60 shadow-md group-hover:scale-110 group-hover:shadow-primary/30 transition-all duration-300">
@@ -186,7 +184,6 @@ export const AboutSection = () => {
                       </p>
                     </div>
                   </div>
-
                   {/* Bottom accent line */}
                   <div className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-primary to-primary/30 transition-all duration-500 rounded-b-2xl" />
                 </div>
@@ -195,100 +192,131 @@ export const AboutSection = () => {
           </div>
         </div>
 
-        {/* ── Education & Experience Section ── */}
+        {/* ── Education & Experience Side-by-Side ── */}
         <div className={`transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
 
-          {/* Divider */}
-          <div className="relative flex flex-wrap items-center justify-center gap-3 mb-10">
-            <div className="hidden sm:block flex-grow border-t border-border/40" />
-            <div className="flex gap-3 flex-wrap justify-center">
-              <button
-                onClick={() => setActiveTab("education")}
-                className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
-                  activeTab === "education"
-                    ? "bg-primary text-white border-transparent shadow-lg shadow-primary/25"
-                    : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-primary"
-                }`}
-              >
-                <GraduationCap size={15} />
-                Education
-              </button>
-              <button
-                onClick={() => setActiveTab("experience")}
-                className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-300 ${
-                  activeTab === "experience"
-                    ? "bg-primary text-white border-transparent shadow-lg shadow-primary/25"
-                    : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-primary"
-                }`}
-              >
-                <Briefcase size={15} />
-                Work Experience
-              </button>
-            </div>
-            <div className="hidden sm:block flex-grow border-t border-border/40" />
+          {/* Section divider label */}
+          <div className="relative flex items-center gap-4 mb-12">
+            <div className="flex-grow h-px bg-gradient-to-r from-transparent via-border/60 to-transparent" />
+            <span className="text-xs font-semibold tracking-widest text-muted-foreground uppercase px-3">
+              Qualifications & Experience
+            </span>
+            <div className="flex-grow h-px bg-gradient-to-r from-transparent via-border/60 to-transparent" />
           </div>
 
-          {/* Education Tab */}
-          {activeTab === "education" && (
-            <div className="relative pl-6 border-l-2 border-primary/30 space-y-8 max-w-3xl mx-auto">
-              {education.map((edu, i) => (
-                <div key={i} className="relative group">
-                  {/* Timeline dot */}
-                  <div className="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary group-hover:bg-primary transition-colors duration-300" />
-                  <div className="p-5 rounded-2xl border border-border/50 bg-card/70 backdrop-blur-sm hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1">
-                      <h4 className="font-bold text-foreground text-base leading-snug group-hover:text-primary transition-colors duration-300">
-                        {edu.degree}
-                      </h4>
-                      <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-                        {edu.period}
-                      </span>
-                    </div>
-                    {edu.grade && (
-                      <p className="text-sm text-primary/80 font-medium mb-0.5">{edu.grade}</p>
-                    )}
-                    <p className="text-sm text-muted-foreground">{edu.institution}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
 
-          {/* Experience Tab */}
-          {activeTab === "experience" && (
-            <div className="relative pl-6 border-l-2 border-primary/30 space-y-8 max-w-3xl mx-auto">
-              {experience.map((exp, i) => (
-                <div key={i} className="relative group">
-                  {/* Timeline dot */}
-                  <div className="absolute -left-[29px] top-1.5 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary group-hover:bg-primary transition-colors duration-300" />
-                  <div className="p-5 rounded-2xl border border-border/50 bg-card/70 backdrop-blur-sm hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
-                      <div>
-                        <h4 className="font-bold text-foreground text-base leading-snug group-hover:text-primary transition-colors duration-300">
-                          {exp.role}
-                        </h4>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <Building2 size={13} className="text-primary/70" />
-                          <span className="text-sm text-primary/80 font-medium">{exp.company}</span>
-                        </div>
-                      </div>
-                      <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
-                        {exp.period}
-                      </span>
-                    </div>
-                    <ul className="space-y-2">
-                      {exp.points.map((point, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
-                          <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary/50" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+            {/* ── Education Column ── */}
+            <div>
+              {/* Column header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/60 shadow-md">
+                  <GraduationCap className="h-5 w-5 text-white" />
                 </div>
-              ))}
+                <h3 className="text-xl font-bold text-foreground">Education</h3>
+              </div>
+
+              <div className="space-y-4">
+                {education.map((edu, i) => (
+                  <div
+                    key={i}
+                    className="group relative p-5 rounded-2xl border border-border/50 bg-card/70 backdrop-blur-sm overflow-hidden cursor-default"
+                    style={{
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(28px)',
+                      transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${700 + i * 130}ms,
+                                   transform 0.65s cubic-bezier(0.22,1,0.36,1) ${700 + i * 130}ms,
+                                   box-shadow 0.3s ease,
+                                   border-color 0.3s ease`,
+                    }}
+                  >
+                    {/* Top sweep accent bar */}
+                    <div className="absolute top-0 left-0 h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-primary via-primary/70 to-primary/20 transition-all duration-500 ease-out rounded-t-2xl" />
+                    {/* Soft glow overlay */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                      style={{ background: 'radial-gradient(ellipse at top left, rgba(59,130,246,0.07) 0%, transparent 70%)' }}
+                    />
+                    {/* Lift on hover */}
+                    <div className="relative z-10 group-hover:-translate-y-0.5 transition-transform duration-300">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
+                        <h4 className="font-bold text-foreground text-sm leading-snug group-hover:text-primary transition-colors duration-300">
+                          {edu.degree}
+                        </h4>
+                        <span className="shrink-0 self-start text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary/20 transition-colors duration-300">
+                          {edu.period}
+                        </span>
+                      </div>
+                      {edu.grade && (
+                        <p className="text-xs text-primary/80 font-semibold mb-1">{edu.grade}</p>
+                      )}
+                      <p className="text-xs text-muted-foreground font-medium">{edu.institution}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          )}
+
+            {/* ── Work Experience Column ── */}
+            <div>
+              {/* Column header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/60 shadow-md">
+                  <Briefcase className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground">Work Experience</h3>
+              </div>
+
+              <div className="space-y-4">
+                {experience.map((exp, i) => (
+                  <div
+                    key={i}
+                    className="group relative p-5 rounded-2xl border border-border/50 bg-card/70 backdrop-blur-sm overflow-hidden cursor-default"
+                    style={{
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateY(0)' : 'translateY(28px)',
+                      transition: `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${830 + i * 130}ms,
+                                   transform 0.65s cubic-bezier(0.22,1,0.36,1) ${830 + i * 130}ms,
+                                   box-shadow 0.3s ease,
+                                   border-color 0.3s ease`,
+                    }}
+                  >
+                    {/* Top sweep accent bar */}
+                    <div className="absolute top-0 left-0 h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-primary via-primary/70 to-primary/20 transition-all duration-500 ease-out rounded-t-2xl" />
+                    {/* Soft glow overlay */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                      style={{ background: 'radial-gradient(ellipse at top left, rgba(59,130,246,0.07) 0%, transparent 70%)' }}
+                    />
+
+                    <div className="relative z-10 group-hover:-translate-y-0.5 transition-transform duration-300">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                          <h4 className="font-bold text-foreground text-sm leading-snug group-hover:text-primary transition-colors duration-300">
+                            {exp.role}
+                          </h4>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            <Building2 size={12} className="text-primary/70" />
+                            <span className="text-xs text-primary/80 font-semibold">{exp.company}</span>
+                          </div>
+                        </div>
+                        <span className="shrink-0 self-start text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 group-hover:bg-primary/20 transition-colors duration-300">
+                          {exp.period}
+                        </span>
+                      </div>
+                      <ul className="space-y-2">
+                        {exp.points.map((point, j) => (
+                          <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
+                            <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors duration-300" />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
