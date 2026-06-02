@@ -73,6 +73,10 @@ export const HeroSection = () => {
     };
   }, []);
 
+  const scrollToAbout = () => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section
       id="hero"
@@ -134,10 +138,14 @@ export const HeroSection = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <span className="text-xs sm:text-sm text-muted-foreground mb-2">Scroll</span>
-        <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-      </div>
+      <button
+        onClick={scrollToAbout}
+        className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce cursor-pointer group focus:outline-none bg-transparent border-none"
+        aria-label="Scroll to About section"
+      >
+        <span className="text-xs sm:text-sm text-muted-foreground mb-2 group-hover:text-primary transition-colors">Scroll</span>
+        <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 text-primary group-hover:scale-110 transition-transform" />
+      </button>
     </section>
   );
 };
