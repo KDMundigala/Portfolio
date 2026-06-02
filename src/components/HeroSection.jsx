@@ -1,5 +1,5 @@
 import { ArrowDown } from "lucide-react";
-import profilePhoto from "../assets/profilephoto.png";
+import profilePhoto from "../assets/Adobe Express - file.png";
 import { useEffect, useRef } from 'react';
 
 export const HeroSection = () => {
